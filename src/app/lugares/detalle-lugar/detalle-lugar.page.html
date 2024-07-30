@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/lugares" text="Volver"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{Lugar.Titulo}}</ion-title>
+    <ion-buttons slot="primary" slot="end">
+      <ion-button [routerLink]="['/lugares/modificar-lugar',Lugar.Codigo]">
+        <ion-icon name="pencil-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="primary" slot="end">
+      <ion-button (click)="EliminarLugar()">
+        <ion-icon name="trash" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-img [src]="Lugar.ImagenURL"> </ion-img>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <h1 class="ion-text-center">{{Lugar.Titulo}}</h1>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-list *ngIf="Lugar.Comentario && Lugar.Comentario.length > 0 ; else NoComentarios">
+          <ion-item *ngFor="let com of Lugar.Comentario">
+            <ion-label> {{com}} </ion-label>
+          </ion-item>
+        </ion-list>
+        <ng-template #NoComentarios>
+          <ion-text>
+            <p> No hay comentarios ahora </p>
+          </ion-text>
+        </ng-template>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
